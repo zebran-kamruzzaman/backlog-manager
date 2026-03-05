@@ -1,0 +1,96 @@
+{
+  "name": "backlog-manager",
+  "version": "1.0.0",
+  "description": "Personal backlog tracker for movies, TV, anime, games & restaurants",
+  "main": ".webpack/main",
+  "scripts": {
+    "start":   "electron-forge start",
+    "package": "electron-forge package",
+    "make":    "electron-forge make",
+    "publish": "electron-forge publish"
+  },
+  "devDependencies": {
+    "@electron-forge/cli":                        "^7.4.0",
+    "@electron-forge/maker-squirrel":             "^7.4.0",
+    "@electron-forge/maker-zip":                  "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-webpack":             "^7.4.0",
+    "@vercel/webpack-asset-relocator-loader":     "1.7.3",
+    "@tailwindcss/postcss":                       "^4.0.0",
+    "@types/better-sqlite3":                      "^7.6.13",
+    "@types/react":                               "^18.3.3",
+    "@types/react-dom":                           "^18.3.0",
+    "css-loader":                                 "^7.1.2",
+    "electron":                                   "^31.0.0",
+    "fork-ts-checker-webpack-plugin":             "^9.0.2",
+    "node-loader":                                "^2.0.0",
+    "postcss":                                    "^8.4.39",
+    "postcss-loader":                             "^8.1.1",
+    "style-loader":                               "^4.0.0",
+    "tailwindcss":                                "^4.0.0",
+    "ts-loader":                                  "^9.5.1",
+    "typescript":                                 "^5.5.2"
+  },
+  "dependencies": {
+    "@hello-pangea/dnd": "^16.6.0",
+    "better-sqlite3":    "^11.1.2",
+    "react":             "^18.3.1",
+    "react-dom":         "^18.3.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "name":           "BacklogManager",
+        "executableName": "BacklogManager",
+        "appVersion":     "1.0.0",
+        "icon":           "./assets/icon",
+        "asar":           true,
+        "win32metadata": {
+          "CompanyName":      "Personal",
+          "FileDescription":  "Backlog Manager",
+          "ProductName":      "Backlog Manager",
+          "InternalName":     "BacklogManager"
+        },
+        "ignore": [
+          "^/\\.env$",
+          "^/\\.git",
+          "^/src$",
+          "^/node_modules/.cache"
+        ]
+      },
+      "rebuildConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": ["win32"]
+        }
+      ],
+      "plugins": [
+        {
+          "name": "@electron-forge/plugin-auto-unpack-natives",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/plugin-webpack",
+          "config": {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html":    "./src/renderer/index.html",
+                  "js":      "./src/renderer/index.tsx",
+                  "name":    "main_window",
+                  "preload": {
+                    "js":     "./src/preload.ts",
+                    "config": "./webpack.preload.config.js"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+# ==================================
+#  .gitignore — Backlog Manager
+# ==================================
+
+# Dependencies
+node_modules/
+
+# Build output
+.webpack/
+out/
+dist/
+
+# Electron Forge cache
+.forge/
+
+# Database (user data — never commit) 
+*.db
+*.db-shm
+*.db-wal
+
+# Encrypted key store (user data — never commit)
+api-keys.enc
+
+# Environment / secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Release zips (build locally, don't commit)
+*.zip
+*.tar.gz
+
+# Misc
+coverage/
+.cache/
